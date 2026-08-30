@@ -187,11 +187,11 @@ BASE_MODEL=Qwen/Qwen3-0.6B \
 bash scripts/train_sft.sh
 ```
 
-For an offline local model:
+For an offline model, use a path relative to the repository root and adjust it to match your layout:
 
 ```bash
 GPU_IDS=0,1 \
-BASE_MODEL=/shared/models/Qwen3-0.6B \
+BASE_MODEL=../models/Qwen3-0.6B \
 DATA_PATH=data/kd_data.jsonl \
 OUTPUT_DIR=outputs/sft \
 MAX_EPOCHS=1 \
@@ -232,15 +232,15 @@ Default full shape:
 ## Detached tmux launch
 
 ```bash
-tmux new-session -d -s faro2-sft \
-  "cd $PWD && GPU_IDS=0,1 bash scripts/train_sft.sh"
+tmux new-session -d -s faro2-sft -c "$PWD" \
+  "GPU_IDS=0,1 bash scripts/train_sft.sh"
 ```
 
 After SFT completes:
 
 ```bash
-tmux new-session -d -s faro2-rl \
-  "cd $PWD && GPU_IDS=0,1 SFT_MODEL=outputs/sft bash scripts/train_opsd_2xa800.sh"
+tmux new-session -d -s faro2-rl -c "$PWD" \
+  "GPU_IDS=0,1 SFT_MODEL=outputs/sft bash scripts/train_opsd_2xa800.sh"
 ```
 
 ## Key environment variables

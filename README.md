@@ -249,11 +249,11 @@ BASE_MODEL=Qwen/Qwen3-0.6B \
 bash scripts/train_sft.sh
 ```
 
-本地模型示例：
+离线模型示例（从仓库根目录使用相对路径；请按实际位置调整）：
 
 ```bash
 GPU_IDS=0,1 \
-BASE_MODEL=/shared/models/Qwen3-0.6B \
+BASE_MODEL=../models/Qwen3-0.6B \
 DATA_PATH=data/kd_data.jsonl \
 OUTPUT_DIR=outputs/sft \
 MAX_EPOCHS=1 \
@@ -296,15 +296,15 @@ bash scripts/train_opsd_2xa800.sh
 SFT：
 
 ```bash
-tmux new-session -d -s faro2-sft \
-  "cd $PWD && GPU_IDS=0,1 bash scripts/train_sft.sh"
+tmux new-session -d -s faro2-sft -c "$PWD" \
+  "GPU_IDS=0,1 bash scripts/train_sft.sh"
 ```
 
 确认 SFT 完成后启动 OPSD：
 
 ```bash
-tmux new-session -d -s faro2-rl \
-  "cd $PWD && GPU_IDS=0,1 SFT_MODEL=outputs/sft bash scripts/train_opsd_2xa800.sh"
+tmux new-session -d -s faro2-rl -c "$PWD" \
+  "GPU_IDS=0,1 SFT_MODEL=outputs/sft bash scripts/train_opsd_2xa800.sh"
 ```
 
 查看日志：

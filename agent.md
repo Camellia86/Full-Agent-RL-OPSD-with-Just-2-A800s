@@ -11,18 +11,15 @@ FARO2 is a training-only project. Keep the working tree limited to the SFT stage
 
 ## Server layout
 
-Recommended checkout:
+Clone the repository into any directory on storage shared by the CPU and GPU hosts. This runbook assumes every command is started from the repository root; no machine-specific checkout path is required.
 
-```text
-/volume/wzhang/nzx/Full_Agent_RL_OPSD_with_Just_2_A800s
-```
-
-Perform downloads and environment setup on an internet-enabled CPU host. Run SFT and OPSD on the GPU host. The checkout, model cache, data, and outputs must be on storage shared by those hosts.
+Perform downloads and environment setup on an internet-enabled CPU host. Run SFT and OPSD on the GPU host. The checkout, model cache, data, and outputs must be accessible from both hosts.
 
 ## One-time setup
 
 ```bash
-cd /volume/wzhang/nzx/Full_Agent_RL_OPSD_with_Just_2_A800s
+git clone https://github.com/Camellia86/Full-Agent-RL-OPSD-with-Just-2-A800s.git FARO2
+cd FARO2
 bash scripts/setup_env.sh
 source .venv/bin/activate
 
@@ -31,16 +28,15 @@ hf download Camellia86/Full_Agent_RL_OPSD_with_Just_2_A800s \
   --local-dir data
 ```
 
-If the GPU host has no internet, download `Qwen/Qwen3-0.6B` on the CPU host and pass its shared local path through `BASE_MODEL`.
+If the GPU host has no internet, download `Qwen/Qwen3-0.6B` on the CPU host and pass its shared path through `BASE_MODEL`. In the commands below, `../models/Qwen3-0.6B` is an example path relative to the repository root.
 
 ## Start SFT
 
 Choose two safe physical GPU ids, then launch in tmux:
 
 ```bash
-tmux new-session -d -s faro2-sft \
-  "cd /volume/wzhang/nzx/Full_Agent_RL_OPSD_with_Just_2_A800s && \
-   GPU_IDS=0,1 BASE_MODEL=/shared/path/Qwen3-0.6B bash scripts/train_sft.sh"
+tmux new-session -d -s faro2-sft -c "$PWD" \
+  "GPU_IDS=0,1 BASE_MODEL=../models/Qwen3-0.6B bash scripts/train_sft.sh"
 ```
 
 The required completion sentinel is:
@@ -56,9 +52,8 @@ Do not start OPSD until `outputs/sft/model.safetensors` exists and the SFT statu
 Re-check the same two cards immediately before launch. FARO2 OPSD uses no external teacher. Preserve the default frozen-reference KL, dynamic filtering, group-normalized advantages, conservative learning rate, and gradient clipping; these are the stability guardrails for the 0.6B model.
 
 ```bash
-tmux new-session -d -s faro2-rl \
-  "cd /volume/wzhang/nzx/Full_Agent_RL_OPSD_with_Just_2_A800s && \
-   GPU_IDS=0,1 SFT_MODEL=outputs/sft bash scripts/train_opsd_2xa800.sh"
+tmux new-session -d -s faro2-rl -c "$PWD" \
+  "GPU_IDS=0,1 SFT_MODEL=outputs/sft bash scripts/train_opsd_2xa800.sh"
 ```
 
 Handoff locations:
