@@ -86,7 +86,7 @@ FARO2 因此把任务聚焦在工具调用能力上：SFT 先建立格式和任�
 
 ### 4. 低经验门槛
 
-FARO2 使用 OpenRLHF、Ray、DeepSpeed 与 vLLM，但用户不需要先掌握这些框架的全部细节。常用配置都通过环境变量暴露，默认值可以直接运行；脚本同时执行输入文件检查、GPU 数量检查、模型产物检查和状态落盘。
+FARO2 使用 OpenRLHF、Ray、DeepSpeed 与 vLLM，但不需要先掌握这些框架的全部细节。常用配置都通过环境变量暴露，默认值可以直接运行；脚本同时执行输入文件检查、GPU 数量检查、模型产物检查和状态落盘。
 
 ### 5. 小模型也稳定：0.6B 通常不会轻易训崩
 
@@ -352,7 +352,7 @@ outputs/
 
 ## 推荐测评
 
-完成训练后，建议 follow 本项目的用户使用 **ACEBench** 复核模型的工具调用能力。FARO2 仓库保持 training-only，不重复打包其测评实现。
+完成训练后，建议使用 **ACEBench** 复核模型的工具调用能力。
 
 ACEBench 官方项目：<https://github.com/chenchen0103/ACEBench>
 
@@ -368,7 +368,7 @@ ACEBench 官方项目：<https://github.com/chenchen0103/ACEBench>
 
 ## 数据发布说明
 
-公开数据仅用于让缺少数据的用户能够完整复现训练流水线。完整自采语料未包含在 Hugging Face 或 GitHub 中。公开抽样的种子、行数、字节数和 SHA-256 均记录在 `sampling_manifest.json`。
+完整自采语料未包含在 Hugging Face 或 GitHub 中。公开抽样的种子、行数、字节数和 SHA-256 均记录在 `sampling_manifest.json`。
 
 ## License
 
