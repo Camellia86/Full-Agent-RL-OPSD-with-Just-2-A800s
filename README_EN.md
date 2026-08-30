@@ -19,7 +19,7 @@
 
 **FARO2** stands for **F**ull **A**gent **R**L **O**PSD on **2** GPUs.
 
-FARO2 is designed for people who want to complete a real Agent RL project but have limited compute, limited RL/OPD experience, or no ready-to-use tool-calling data. It packages data, SFT, online rollout generation, tool-calling rewards, a frozen reference, OPSD updates, vLLM weight synchronization, checkpoint recovery, and memory tracing into one executable pipeline.
+If you want to complete a real Agent RL project but have limited compute, limited RL/OPD experience, or no ready-to-use tool-calling data, you can choose FARO2. It packages data, SFT, online rollout generation, tool-calling rewards, a frozen reference, OPSD updates, vLLM weight synchronization, checkpoint recovery, and memory tracing into one executable pipeline.
 
 The default recipe starts from Qwen3-0.6B and requires only two 80GB GPUs.
 
@@ -51,10 +51,10 @@ The repository includes a pinned environment installer, SFT launcher, two-GPU OP
 
 The complete internally collected corpus is retained for research publication. The Hugging Face release contains an exact uniform sample without replacement using `floor(N × 0.4)` rows from each training file, with original row order restored afterward.
 
-| File | Full rows | Released rows | Seed | SHA-256 |
-|---|---:|---:|---:|---|
-| `kd_data.jsonl` | 1,073,046 | 429,218 | 20260830 | `44c7afbd1b304b63191d48d3b4c89fed6250b04f4987471ef75c07a352a517c7` |
-| `rl_data.jsonl` | 144,490 | 57,796 | 20260831 | `68d6132bb3371ebe1ba5f2479e0563d33c0e8b8201f21157467586e76a258120` |
+| File | Rows |
+|---|---:|
+| `kd_data.jsonl` | 429,218 |
+| `rl_data.jsonl` | 57,796 |
 
 Every JSONL row contains `id`, `inputs`, and `targets`.
 
