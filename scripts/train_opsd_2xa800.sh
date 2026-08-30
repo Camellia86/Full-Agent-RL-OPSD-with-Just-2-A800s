@@ -7,7 +7,7 @@ GPU_IDS="${GPU_IDS:-0,1}"
 SFT_MODEL="${SFT_MODEL:-$PROJECT_ROOT/outputs/sft}"
 DATA_PATH="${DATA_PATH:-$PROJECT_ROOT/data/rl_data.jsonl}"
 REWARD_PATH="${REWARD_PATH:-$PROJECT_ROOT/opsd/reward.py}"
-RUN_NAME="${RUN_NAME:-opsd_qwen3_0p6b_s42}"
+RUN_NAME="${RUN_NAME:-faro2_qwen3_0p6b_s42}"
 OUTPUT_DIR="${OUTPUT_DIR:-$PROJECT_ROOT/outputs/$RUN_NAME}"
 CKPT_DIR="${CKPT_DIR:-$OUTPUT_DIR/trainer_state}"
 SEED="${SEED:-42}"
@@ -83,7 +83,7 @@ stop_monitor() {
 trap stop_monitor EXIT
 
 cat > "$OUTPUT_DIR/run_config.txt" <<EOF
-stage=opsd
+stage=faro2-opsd
 pretrain=$SFT_MODEL
 prompt_data=$DATA_PATH
 external_teacher=none
@@ -95,7 +95,7 @@ vllm_target_mib=$VLLM_TARGET_MIB
 vllm_gpu_memory_utilization=$VLLM_GPU_MEMORY_UTILIZATION
 a800_card_limit_mib=$A800_CARD_LIMIT_MIB
 EOF
-printf 'RUNNING stage=opsd gpu_ids=%s time=%s\n' "$GPU_IDS" "$(date --iso-8601=seconds)" > "$OUTPUT_DIR/status.txt"
+printf 'RUNNING stage=faro2-opsd gpu_ids=%s time=%s\n' "$GPU_IDS" "$(date --iso-8601=seconds)" > "$OUTPUT_DIR/status.txt"
 
 set +e
 python -m openrlhf.cli.train_ppo_ray \
@@ -147,12 +147,12 @@ awk -F, 'NR > 1 {
 }' "$TRACE_FILE" | sort -n >> "$PEAK_FILE"
 
 if (( rc != 0 )); then
-  printf 'FAILED stage=opsd rc=%s time=%s\n' "$rc" "$(date --iso-8601=seconds)" > "$OUTPUT_DIR/status.txt"
+  printf 'FAILED stage=faro2-opsd rc=%s time=%s\n' "$rc" "$(date --iso-8601=seconds)" > "$OUTPUT_DIR/status.txt"
   exit "$rc"
 fi
 
 [[ -s "$OUTPUT_DIR/model.safetensors" ]] || {
-  printf 'FAILED stage=opsd missing_model time=%s\n' "$(date --iso-8601=seconds)" > "$OUTPUT_DIR/status.txt"
+  printf 'FAILED stage=faro2-opsd missing_model time=%s\n' "$(date --iso-8601=seconds)" > "$OUTPUT_DIR/status.txt"
   exit 4
 }
 
@@ -161,4 +161,4 @@ if awk -F'\t' -v limit="$A800_CARD_LIMIT_MIB" 'NR > 1 && $2 > limit {bad=1} END 
   exit 5
 fi
 
-printf 'COMPLETE_A800_FIT stage=opsd gpu_ids=%s time=%s\n' "$GPU_IDS" "$(date --iso-8601=seconds)" > "$OUTPUT_DIR/status.txt"
+printf 'COMPLETE_A800_FIT stage=faro2-opsd gpu_ids=%s time=%s\n' "$GPU_IDS" "$(date --iso-8601=seconds)" > "$OUTPUT_DIR/status.txt"
