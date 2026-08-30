@@ -174,7 +174,7 @@ FARO2/
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/Camellia86/-Full_Agent_RL_OPSD_with_Just_2_A800s-.git FARO2
+git clone https://github.com/Camellia86/Full-Agent-RL-OPSD-with-Just-2-A800s.git FARO2
 cd FARO2
 ```
 
@@ -381,7 +381,7 @@ FARO2 采用 [MIT License](LICENSE)。第三方依赖仍遵循其各自许可证
   title  = {FARO2: Full Agent RL OPSD on Just Two 80GB GPUs},
   author = {Camellia86},
   year   = {2026},
-  url    = {https://github.com/Camellia86/-Full_Agent_RL_OPSD_with_Just_2_A800s-}
+  url    = {https://github.com/Camellia86/Full-Agent-RL-OPSD-with-Just-2-A800s}
 }
 ```
 

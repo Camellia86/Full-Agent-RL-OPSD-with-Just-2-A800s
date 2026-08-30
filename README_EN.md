@@ -134,7 +134,7 @@ Recommended system: two A800 80GB, H800 80GB, or H200 GPUs; Linux; Python 3.12; 
 ### 1. Clone
 
 ```bash
-git clone https://github.com/Camellia86/-Full_Agent_RL_OPSD_with_Just_2_A800s-.git FARO2
+git clone https://github.com/Camellia86/Full-Agent-RL-OPSD-with-Just-2-A800s.git FARO2
 cd FARO2
 ```
 
@@ -310,7 +310,7 @@ FARO2 is released under the [MIT License](LICENSE). Third-party dependencies ret
   title  = {FARO2: Full Agent RL OPSD on Just Two 80GB GPUs},
   author = {Camellia86},
   year   = {2026},
-  url    = {https://github.com/Camellia86/-Full_Agent_RL_OPSD_with_Just_2_A800s-}
+  url    = {https://github.com/Camellia86/Full-Agent-RL-OPSD-with-Just-2-A800s}
 }
 ```
 
