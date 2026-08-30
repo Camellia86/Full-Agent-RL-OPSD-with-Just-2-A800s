@@ -60,7 +60,7 @@ Every JSONL row contains `id`, `inputs`, and `targets`.
 
 ### 4. Low experience barrier
 
-FARO2 uses OpenRLHF, Ray, DeepSpeed, and vLLM, but users do not need to master all four systems before starting. The most important controls are exposed as environment variables, while launchers validate data paths, GPU count, model artifacts, checkpoint state, and completion status.
+FARO2 uses OpenRLHF, Ray, DeepSpeed, and vLLM, but you do not need to master all four systems before starting. The most important controls are exposed as environment variables, while launchers validate data paths, GPU count, model artifacts, checkpoint state, and completion status.
 
 ### 5. Stable even at 0.6B
 
@@ -297,7 +297,7 @@ If training becomes abnormal:
 
 ## Data release policy
 
-The public subset enables users without proprietary data to run the complete pipeline. The full internally collected corpus is not included on GitHub or Hugging Face. Sampling seeds, counts, byte sizes, and SHA-256 values are recorded in `sampling_manifest.json`.
+The full internally collected corpus is not included on GitHub or Hugging Face. Sampling seeds, counts, byte sizes, and SHA-256 values are recorded in `sampling_manifest.json`.
 
 ## License
 
