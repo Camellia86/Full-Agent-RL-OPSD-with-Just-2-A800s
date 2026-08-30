@@ -63,7 +63,7 @@ data/rl_data.jsonl
 
 <!-- DATASET_STATS_START -->
 | File |Rows |
-|---|---:|---:|---:|---|
+|---|---:|
 | `kd_data.jsonl` | 429,218 | 
 | `rl_data.jsonl` | 57,796 |
 
