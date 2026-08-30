@@ -59,16 +59,14 @@ Expected files:
 ```text
 data/kd_data.jsonl
 data/rl_data.jsonl
-data/sampling_manifest.json
 ```
 
 <!-- DATASET_STATS_START -->
-| File | Full rows | Released rows | Seed | SHA-256 |
+| File |Rows |
 |---|---:|---:|---:|---|
-| `kd_data.jsonl` | 1,073,046 | 429,218 | 20260830 | `44c7afbd1b304b63191d48d3b4c89fed6250b04f4987471ef75c07a352a517c7` |
-| `rl_data.jsonl` | 144,490 | 57,796 | 20260831 | `68d6132bb3371ebe1ba5f2479e0563d33c0e8b8201f21157467586e76a258120` |
+| `kd_data.jsonl` | 429,218 | 
+| `rl_data.jsonl` | 57,796 |
 
-Sampling is uniform without replacement using `floor(N × 0.4)` rows, followed by restoration of the original row order. The full files are not included in this repository or the Hugging Face release.
 <!-- DATASET_STATS_END -->
 
 ## Stage 1: SFT
