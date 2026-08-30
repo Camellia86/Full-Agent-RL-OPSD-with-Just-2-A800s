@@ -1,0 +1,2 @@
+openrlhf[vllm]==0.8.9
+rouge-score==0.1.2
